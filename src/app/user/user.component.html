@@ -1,0 +1,44 @@
+<div class="container">
+  <h1>Employee Details</h1>
+
+  <table class="table table-responsive-sm table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">Emp Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Phone Number</th>
+      <th scope="col">Email Id</th>
+      <th scope="col">Salary</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let users of pageUsers?.content" scope="row">
+      <td>{{ users?.id }}</td>
+      <td>{{ users?.name }}</td>
+      <td>{{ users?.address}}</td>
+      <td>{{ users?.phoneNumber}}</td>
+      <td>{{ users?.email}}</td>
+      <td>{{ users?.empSalary}}</td>
+
+    </tr>
+    <tr *ngIf="pageUsers.content.length === 0 || undefined" scope="row">
+      <td class="text-center" colspan="6">No record found</td>
+    </tr>
+    </tbody>
+  </table>
+  <tbody *ngIf="pageUsers?.content.length == 0">
+  <td class="text-left" colspan="9">Data Not Found..!!</td>
+  </tbody>
+  <div class="row justify-content-between m-0">
+    <div *ngIf="pageUsers?.content" class="col-xs-9 col-9 text-center p-0">
+      <pagination (numPages)="numPages = $event;" (pageChanged)="onSelect($event.page-1)" [(ngModel)]="selectedPage"
+                  [boundaryLinks]="true" [itemsPerPage]="pageUsers?.size" [maxSize]="maxSize" [rotate]="false"
+                  [totalItems]="pageUsers?.totalElements" class="pagination-md" firstText="&laquo; First"
+                  lastText="Last &raquo; " nextText="Next &rsaquo;" previousText="&lsaquo; Prev">
+      </pagination>
+    </div>
+
+  </div>
+</div>
